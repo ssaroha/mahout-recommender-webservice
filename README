@@ -1,0 +1,1 @@
+Since Mahout 0.5, Mahout's recommender webservice example taste-web is not included as part of standard distribution.. This project provides a working demo which can be invoked as a webservice.
