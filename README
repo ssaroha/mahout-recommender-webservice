@@ -1,1 +1,31 @@
-Since Mahout 0.5, Mahout's recommender webservice example taste-web is not included as part of standard distribution.. This project provides a working demo which can be invoked as a webservice.
+Since Mahout 0.5, Mahout's recommender webservice example taste-web is not included as part of standard distribution.
+
+Looking around on the web, there are several folks who are looking to see Mahout 0.6 and above versions have a working example of the webservice.
+
+Given it took me a few hours to bring together the relevant files from integration directory, and put them all into an independent maven based build, I thought it might be useful for others. Also note that, this directly pulls the mahout dependencies like mahout-core, mahout-math, mahout-examples from maven repository. Right now its pulling 0.6 version, but you can easily modify the pom.xml to pull the later versions.
+
+
+Steps to run the webservice:-
+1. Download the source from my git repository.
+2. go to mahout_service directory
+3. Do "mvn install", this step will use the pom.xml to compile the recommender files and the core jar files needed by example recommender into a .war file
+4. The key files of interest are in following directories:
+    - mahout_service/src/main/webapp/WEB-INF/web.xml - It contains the entrypoint to the Recommender Webservice.
+    - mahout_service/src/main/java/com/mykidscart/mahout_service/RecommenderServlet.java - This file has the servlet entrypoint which returns recommendations.
+5. At the end of step 3, a .war file is created under mahout_service/target/mahout_service.war.
+
+6. Simply drop the the .war file into standard tomcat installation's webapps directory. For example, for my installation I put it under:
+apache-tomcat-7.0.28/webapps/
+7. After copying to webapps, expand the war file in the webapps directory by doing: "unzip -d mahout_service ./mahout_service.war"
+8. Restart your tomcat server, and go to the following url:
+http://localhost:8080/mahout_service/RecommenderServlet?userID=111&howMany=400
+
+9. If everything goes well, you should see the recommendations on the browser.
+
+Note: The standard webservice installation uses the org.apache.mahout.cf.taste.example.grouplens.GroupLensRecommender for giving recommendations. If you want to change the recommender, and provide ur own recommender, please modify the web.xml to replace the grouplens recommender with your own recommender class.
+
+Also the resources directory "mahout_service/src/main/resources" has ratings.dat and movies.dat file for reading the input data. you can change that to read your own specific data relevant for your own recommender.
+
+
+Any questions, send me an email at: ssaroha@yahoo.com
+

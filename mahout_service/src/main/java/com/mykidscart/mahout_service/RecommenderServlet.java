@@ -15,14 +15,8 @@
  * limitations under the License.
  */
 
-// package org.apache.mahout.cf.taste.web;
 
 package com.mykidscart.mahout_service;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Response;
 
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.model.DataModel;
